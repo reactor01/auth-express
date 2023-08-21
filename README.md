@@ -22,5 +22,4 @@ The application is Dockerized for easy deployment.
 
 1. Clone the repository:
 
-- git clone https://github.com/reactor01/auth-express.git
-- cd auth-express 
+git clone https://github.com/reactor01/auth-express.git
