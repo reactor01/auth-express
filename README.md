@@ -1,6 +1,6 @@
 # Node.js Express MongoDB Authentication Example
 
-This is a basic example of a Node.js Express application that demonstrates user authentication using MongoDB for login and signup pages. 
+This is a basic example of a Node.js Express application that demonstrates user authentication using MongoDB for login and signup. 
 The application is Dockerized for easy deployment.
 
 ## Features
