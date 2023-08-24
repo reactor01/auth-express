@@ -1,25 +1,14 @@
 pipeline {
-    agent any 
-
-    environment {
-        DATABASE = env.DATABASE
-    }
-
+    agent any
+    
     stages {
-        stage('Stage 1') {
+        stage('Run Docker Container') {
             steps {
-                echo "This is stage 1 ${env.DATABASE}"
+                // Run the Docker container
+                sh 'docker run -d -p 3000:3000 auth-express'
             }
         }
-        stage('Stage 2') {
-            steps {
-                echo 'This is stage 2'
-            }
-        }
-        stage('Stage 3') {
-            steps {
-                echo 'This is stage 3'
-            }
-        }
+        
+        // Add more stages as needed
     }
 }
