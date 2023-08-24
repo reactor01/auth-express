@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Stage 1') {
             steps {
-                echo 'This is stage 1 ${env.DATABASE}'
+                echo "This is stage 1 ${env.DATABASE}"
             }
         }
         stage('Stage 2') {
