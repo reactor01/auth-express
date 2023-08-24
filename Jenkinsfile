@@ -1,5 +1,10 @@
 pipeline {
     agent any 
+
+    environment {
+        DATABASE = env.DATABASE
+    }
+
     stages {
         stage('Stage 1') {
             steps {
