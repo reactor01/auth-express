@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     stages {
-        stage('Stage 1') {
+        stage('Stage 1 ${env.DATABASE}') {
             steps {
                 echo 'This is stage 1'
                 sh 'rm -fr html'
