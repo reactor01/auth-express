@@ -1,11 +1,9 @@
 pipeline {
     agent any 
     stages {
-        stage('Stage 1 ${env.DATABASE}') {
+        stage('Stage 1') {
             steps {
-                echo 'This is stage 1'
-                sh 'rm -fr html'
-                sh 'git clone https://github.com/dmccuk/html.git'
+                echo 'This is stage 1 ${env.DATABASE}'
             }
         }
         stage('Stage 2') {
