@@ -91,7 +91,7 @@ app.use((req, res, next) => {
 
 // Test route
 app.get('/api/v1', (req, res, next) => {
-  const responseObject = { status: 'ok' } // Create a JSON object
+  const responseObject = { status: 'OK Webhook works' } // Create a JSON object
   res.json(responseObject) // Send the JSON object as the response
 })
 
