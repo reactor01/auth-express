@@ -1,26 +1,13 @@
+# Use a build argument to pass the repository URL during build
+ARG REPO_URL
 FROM node:16
 
-# Create app directory
+# Clone the repository
+RUN git clone ${REPO_URL} /usr/src/app
+
+# Continue with your existing Dockerfile content
 WORKDIR /usr/src/app
-
 ENV NODE_ENV production
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 COPY package*.json ./
-
-# RUN npm ci
-
-COPY . ./
-# RUN npm install
-# If you are building your code for production
 RUN npm ci --only=production
-
-# Bundle app source
-# COPY . .
-
-#this was needed in order to make it work
-# RUN npm install -g nodemon
-
-# EXPOSE 3000
-CMD [ "npm", "run", "build" ]
+CMD ["npm", "run", "build"]
