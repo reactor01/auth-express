@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                    // Clone the Git repository using SSH URL
-                    sh 'git clone git@github.com:reactor01/auth-express.git'
+                   git branch: 'main', url: 'https://github.com/reactor01/auth-express.git'
                 }
             }
         }
