@@ -1,16 +1,7 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // Pull the Docker image (if needed)
-                    sh 'docker build -t auth-express .'
-                }
-            }
-        }
-        
+    stages {        
         stage('Run Docker Container') {
             steps {
                 script {
@@ -29,13 +20,6 @@ pipeline {
                 if (containerIds) {
                     sh "docker stop $containerIds"
                     sh "docker rm $containerIds"
-                }
-            }
-            // Remove all images except auth-express
-            script {
-                def imageIds = sh(script: "docker images -q --format '{{.Repository}}:{{.Tag}}' | grep -v 'auth-express'", returnStdout: true).trim()
-                if (imageIds) {
-                    sh "docker rmi $imageIds"
                 }
             }
         }
