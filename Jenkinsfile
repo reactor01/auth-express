@@ -4,8 +4,11 @@ pipeline {
     stages {
         stage('Run Docker Container') {
             steps {
-                // Run the Docker container using the local image
-                sh 'docker run -d -p 3000:3000 eb0c268223bf'
+                // Pull the Docker image (if needed)
+                sh 'docker pull auth-express:latest'
+
+                // Run the Docker container
+                sh 'docker run -d -p 3000:3000 auth-express'
             }
         }
 
@@ -15,8 +18,8 @@ pipeline {
             }
             steps {
                 // Stop and remove the Docker container
-                sh 'docker stop $(docker ps -q --filter ancestor=eb0c268223bf)'
-                sh 'docker rm $(docker ps -aq --filter ancestor=eb0c268223bf)'
+                sh 'docker stop $(docker ps -q --filter ancestor=auth-express)'
+                sh 'docker rm $(docker ps -aq --filter ancestor=auth-express)'
             }
         }
         
