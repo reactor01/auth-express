@@ -4,16 +4,20 @@ pipeline {
     stages {
         
 
-        stage('Cleanup Docker Container') {
-            when {
-                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
-            }
-            steps {
-                // Stop and remove the Docker container
-                sh 'docker stop $(docker ps -q --filter ancestor=auth-express)'
-                sh 'docker rm $(docker ps -aq --filter ancestor=auth-express)'
+       stage('Cleanup Docker Container') {
+    when {
+        expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
+    }
+    steps {
+        script {
+            def containerIds = sh(script: "docker ps -q --filter ancestor=auth-express", returnStdout: true).trim()
+            if (containerIds) {
+                sh "docker stop $containerIds"
+                sh "docker rm $containerIds"
             }
         }
+    }
+}
         stage('Run Docker Container') {
             steps {
                 // Pull the Docker image (if needed)
