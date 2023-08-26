@@ -2,6 +2,15 @@ pipeline {
     agent any
 
     stages {
+        stage('Clone Repository') {
+            steps {
+                script {
+                    // Clone the public Git repository
+                    sh 'git clone https://github.com/username/repo.git'
+                }
+            }
+        }
+        
         stage('Cleanup and Run Docker Container') {
             steps {
                 script {
