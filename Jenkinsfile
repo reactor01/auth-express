@@ -5,8 +5,8 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 script {
-                    // Clone the public Git repository
-                    sh 'git@github.com:reactor01/auth-express.git'
+                   // Clone the Git repository using SSH URL
+                    sh 'git clone git@github.com:reactor01/auth-express.git'
                 }
             }
         }
