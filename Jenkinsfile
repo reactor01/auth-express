@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Clone the public Git repository
-                    sh 'git clone https://github.com/username/repo.git --depth=1'
+                    sh 'git clone https://github.com/username/repo.git'
 
                 }
             }
