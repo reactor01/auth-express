@@ -25,14 +25,20 @@ pipeline {
 
     post {
         always {
-            // Cleanup Docker Container and Image
+            // Stop and remove all containers except those based on auth-express
             script {
-                def containerIds = sh(script: "docker ps -q --filter ancestor=auth-express", returnStdout: true).trim()
+                def containerIds = sh(script: "docker ps -aq --filter ancestor=auth-express", returnStdout: true).trim()
                 if (containerIds) {
                     sh "docker stop $containerIds"
                     sh "docker rm $containerIds"
                 }
-                sh "docker rmi auth-express"
+            }
+            // Remove all images except auth-express
+            script {
+                def imageIds = sh(script: "docker images -q --format '{{.Repository}}:{{.Tag}}' | grep -v 'auth-express'", returnStdout: true).trim()
+                if (imageIds) {
+                    sh "docker rmi $imageIds"
+                }
             }
         }
     }
