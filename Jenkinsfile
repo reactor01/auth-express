@@ -2,21 +2,19 @@ pipeline {
     agent any
     
     stages {
-        
-
        stage('Cleanup Docker Container') {
-    when {
-        expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
-    }
-    steps {
-        script {
-            def containerIds = sh(script: "docker ps -q --filter ancestor=auth-express", returnStdout: true).trim()
-            if (containerIds) {
-                sh "docker stop $containerIds"
-                sh "docker rm $containerIds"
+            when {
+                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
+            }
+        steps {
+            script {
+                def containerIds = sh(script: "docker ps -q --filter ancestor=auth-express", returnStdout: true).trim()
+                if (containerIds) {
+                    sh "docker stop $containerIds"
+                    sh "docker rm $containerIds"
+                }
             }
         }
-    }
 }
         stage('Run Docker Container') {
             steps {
