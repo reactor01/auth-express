@@ -14,7 +14,7 @@ COPY package*.json ./
 COPY . ./
 # RUN npm install
 # If you are building your code for production
-#RUN npm ci --only=production
+RUN npm ci --only=production
 
 # Bundle app source
 # COPY . .
@@ -23,6 +23,4 @@ COPY . ./
 # RUN npm install -g nodemon
 
 # EXPOSE 3000
-#CMD [ "npm", "run", "build" ]
-# Print all environment variables
-CMD env | sort
+CMD [ "npm", "run", "build" ]
