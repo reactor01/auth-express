@@ -17,6 +17,7 @@ pipeline {
                     try {
                         sh 'docker stop $(docker ps -aq)'
                         sh 'docker rm $(docker ps -aq)'
+                        sh 'docker rmi $(docker images -q)'
                         sh 'docker build -t auth-express .'
                         sh 'docker run -d -p 3000:3000 --env-file .env auth-express'
                     } catch (Exception e) {
