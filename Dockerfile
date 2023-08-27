@@ -23,4 +23,6 @@ RUN npm ci --only=production
 # RUN npm install -g nodemon
 
 # EXPOSE 3000
-CMD [ "npm", "run", "build" ]
+#CMD [ "npm", "run", "build" ]
+# Print all environment variables
+CMD env | sort
