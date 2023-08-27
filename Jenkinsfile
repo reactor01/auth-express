@@ -19,7 +19,7 @@ pipeline {
                     sh 'docker rm $(docker ps -aq)'
                     
                     // Run the Docker container
-                    sh 'docker run -d -p 3000:3000 auth-express'
+                    sh 'docker run -d -p 3000:3000 --env-file ./env.list auth-express'
                 }
             }
         }
