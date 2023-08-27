@@ -14,12 +14,14 @@ pipeline {
         stage('Cleanup and Run Docker Container') {
             steps {
                 script {
-                    // Stop and remove all containers
-                    sh 'docker stop $(docker ps -aq)'
-                    sh 'docker rm $(docker ps -aq)'
-                    
-                    // Run the Docker container
-                    sh 'docker run -d -p 3000:3000 --env-file .env auth-express'
+                    try {
+                        sh 'docker stop $(docker ps -aq)'
+                        sh 'docker rm $(docker ps -aq)'
+                        sh 'docker run -d -p 3000:3000 --env-file .env auth-express'
+                    } catch (Exception e) {
+                        echo "Docker command failed: ${e.message}"
+                        currentBuild.result = 'FAILURE'
+                    }
                 }
             }
         }
